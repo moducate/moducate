@@ -22,7 +22,7 @@ jobs:
 workflows:
   main:
     jobs:
-      - build:
+      - test:
           post-steps:
             - code-climate/install
             - code-climate/format_coverage:
