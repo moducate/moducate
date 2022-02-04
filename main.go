@@ -1,7 +1,11 @@
 package main
 
-import "github.com/moducate/moducate/cmd"
+import (
+	"os"
+
+	"github.com/moducate/moducate/cmd"
+)
 
 func main() {
-	cmd.Execute()
+	cmd.Execute(cmd.MakeRootCmd(), os.Stderr)
 }

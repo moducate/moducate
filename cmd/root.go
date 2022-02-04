@@ -2,6 +2,7 @@ package cmd
 
 import (
 	"fmt"
+	"io"
 	"os"
 
 	"github.com/spf13/cobra"
@@ -16,12 +17,10 @@ func MakeRootCmd() *cobra.Command {
 	}
 }
 
-var rootCmd = MakeRootCmd()
-
 // Execute performs the root command.
-func Execute() {
-	if err := rootCmd.Execute(); err != nil {
-		if _, err := fmt.Fprintln(os.Stderr, err); err != nil {
+func Execute(cmd *cobra.Command, errW io.Writer) {
+	if err := cmd.Execute(); err != nil {
+		if _, err := fmt.Fprintln(errW, err); err != nil {
 			panic(err.Error())
 		}
 		os.Exit(1)

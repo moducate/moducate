@@ -2,6 +2,7 @@ package cmd
 
 import (
 	"bytes"
+	"io"
 	"io/ioutil"
 	"strings"
 	"testing"
@@ -19,13 +20,15 @@ func TestMakeRootCmd(t *testing.T) {
 	assert.NotEmpty(t, cmd.Short)
 }
 
-func TestExecuteRootCmd(t *testing.T) {
+func TestExecute(t *testing.T) {
 	b := bytes.NewBufferString("")
 
 	cmd := MakeRootCmd()
 	cmd.SetOut(b)
 
-	assert.NoError(t, cmd.Execute())
+	assert.NotPanics(t, func() {
+		Execute(cmd, io.Discard)
+	})
 
 	out, err := ioutil.ReadAll(b)
 	assert.NoError(t, err)
