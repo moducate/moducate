@@ -1,0 +1,17 @@
+# Directories
+.circleci
+.git
+.github
+bin
+
+# Files
+.dockerignore
+.gitignore
+Dockerfile
+
+# Markdown
+**/*.md
+!README.md
+
+# Tests
+**/*_test.go
