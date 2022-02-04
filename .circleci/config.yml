@@ -14,10 +14,15 @@ jobs:
       - go/load-cache
       - go/mod-download
       - go/save-cache
+      - run: mkdir -p /tmp/artifacts
       - go/test:
           covermode: atomic
           failfast: true
           race: true
+      - run: go tool cover -html=cover-source.out -o coverage.html
+      - run: mv coverage.html /tmp/artifacts
+      - store_artifacts:
+          path: /tmp/artifacts
 
 workflows:
   main:
