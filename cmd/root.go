@@ -17,6 +17,8 @@ func MakeRootCmd() *cobra.Command {
 	}
 }
 
+var RootCmd = MakeRootCmd()
+
 // Execute performs the root command.
 func Execute(cmd *cobra.Command, errW io.Writer) {
 	if err := cmd.Execute(); err != nil {
