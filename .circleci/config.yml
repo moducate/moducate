@@ -23,6 +23,10 @@ jobs:
       - run: mv coverage.html /tmp/artifacts
       - store_artifacts:
           path: /tmp/artifacts
+      - run: go install github.com/jstemmer/go-junit-report
+      - run: go test -v 2>&1 | go-junit-report > report.xml
+      - store_test_results:
+          path: report.xml
 
 workflows:
   main:
