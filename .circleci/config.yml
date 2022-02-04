@@ -26,6 +26,7 @@ workflows:
           post-steps:
             - code-climate/install
             - code-climate/format_coverage:
+                additional_flags: "--prefix=github.com/moducate/moducate/"
                 coverage_file: cover-source.out
                 input_type: gocov
             - code-climate/upload_coverage
