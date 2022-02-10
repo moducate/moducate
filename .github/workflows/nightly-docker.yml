@@ -5,10 +5,21 @@ on:
     - cron: "0 2 * * *"
 
 jobs:
-  push:
+  check:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - id: nightly-check
+        name: Check for changes since last nightly
+        uses: lukecarr/nightly-check@v0.1.0
+
+  nightly:
     runs-on: ubuntu-latest
 
-    steps:
+    needs: check
+    if: ${{ needs.check.outputs.changes == 'false' }}
+
+    steps:        
       - name: Checkout develop branch
         uses: actions/checkout@v2
         with:
